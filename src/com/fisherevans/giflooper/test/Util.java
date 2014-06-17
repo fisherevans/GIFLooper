@@ -1,4 +1,4 @@
-package com.fisherevans.giflooper;
+package com.fisherevans.giflooper.test;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;

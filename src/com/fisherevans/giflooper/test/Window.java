@@ -1,4 +1,4 @@
-package com.fisherevans.giflooper;
+package com.fisherevans.giflooper.test;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -25,8 +25,8 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import ext.GifDecoder;
-import ext.GifEncoder;
+import lib.GifDecoder;
+import lib.GifEncoder;
 import net.miginfocom.swing.MigLayout;
 
 public class Window {

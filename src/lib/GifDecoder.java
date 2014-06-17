@@ -1,4 +1,4 @@
-package ext;
+package lib;
 
 import java.net.*;
 import java.io.*;

@@ -1,4 +1,4 @@
-package ext;
+package lib;
 import java.io.*;
 import java.awt.*;
 import java.awt.image.*;

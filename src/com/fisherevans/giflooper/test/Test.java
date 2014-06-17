@@ -1,7 +1,7 @@
-package com.fisherevans.giflooper;
+package com.fisherevans.giflooper.test;
 
-import ext.GifEncoder;
-import ext.GifDecoder;
+import lib.GifDecoder;
+import lib.GifEncoder;
 
 public class Test {
 	public static GifDecoder testDecoder(String filename) {

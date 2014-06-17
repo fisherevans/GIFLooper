@@ -1,4 +1,4 @@
-package com.fisherevans.giflooper;
+package com.fisherevans.giflooper.test;
 
 public class Launcher {
 	public static void main(String[] args) {
