@@ -29,6 +29,6 @@ public class Anchor implements Comparable<Anchor>, Serializable {
 
 	@Override
 	public int compareTo(Anchor anchor) {
-		return anchor.frameID-frameID;
+		return frameID-anchor.frameID;
 	}
 }

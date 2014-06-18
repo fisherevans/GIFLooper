@@ -3,16 +3,13 @@ package com.fisherevans.giflooper;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import com.fisherevans.giflooper.panels.OpenPanel;
-import com.fisherevans.giflooper.panels.ProjectPanel;
+import com.fisherevans.giflooper.panels.project.ProjectPanel;
 
 public class GIFLooper {
 	public static JFrame activeFrame = null;
@@ -24,6 +21,7 @@ public class GIFLooper {
 		activeFrame = new JFrame("GIF Looper - Project Editor");
 		activeFrame.add(new ProjectPanel());
 		displayActiveFrame();
+        activeFrame.setMinimumSize(new Dimension(800, 600));
 	}
 	
 	public static void loadOpen() {
@@ -31,11 +29,14 @@ public class GIFLooper {
 		activeFrame = new JFrame("GIF Looper - Open Project");
 		activeFrame.add(new OpenPanel());
 		displayActiveFrame();
+        activeFrame.setResizable(false);
 	}
 	
 	public static void closeActiveFrame() {
-		if(activeFrame != null)
+		if(activeFrame != null) {
+            activeFrame.setJMenuBar(null);
 			activeFrame.dispose();
+        }
 	}
 	
 	public static void displayActiveFrame() {
@@ -51,6 +52,12 @@ public class GIFLooper {
 		JOptionPane.showMessageDialog(activeFrame,
 				message, "Error", JOptionPane.WARNING_MESSAGE);
 	}
+
+    public static boolean confirm(String message) {
+        int result = JOptionPane.showConfirmDialog(activeFrame, message,
+                "Are You Sure?", JOptionPane.YES_NO_OPTION);
+        return result == JOptionPane.YES_OPTION;
+    }
 	
 	public static void center(JFrame frame) {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

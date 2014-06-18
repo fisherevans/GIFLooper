@@ -1,4 +1,4 @@
-package com.fisherevans.giflooper.panels;
+package com.fisherevans.giflooper.panels.project;
 
 import javax.swing.JPanel;
 

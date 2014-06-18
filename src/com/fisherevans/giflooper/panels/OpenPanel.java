@@ -93,7 +93,8 @@ public class OpenPanel extends JPanel {
 		if(_gif == null)
 			return;
 		String path = _gif.getAbsolutePath();
-		_settings = new File(path.substring(0, path.lastIndexOf(".")) + ".glp");
+        int index = path.lastIndexOf(".");
+		_settings = new File(path.substring(0, index > 0 ? index : path.length()) + ".glp");
 		if(_settings.exists())
 			_messageLabel.setText("Project file found.");
 		else 
@@ -126,7 +127,7 @@ public class OpenPanel extends JPanel {
 	private class OpenListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			if(_gif.exists()) {
+			if(_gif != null && _gif.exists()) {
 				GIFLooper.gifFile = _gif;
 				GIFLooper.settingsFile = _settings;
 				GIFLooper.loadProject();
