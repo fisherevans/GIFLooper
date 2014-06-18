@@ -1,6 +1,10 @@
-package com.fisherevans.giflooper;
+package com.fisherevans.giflooper.app;
 
 import javax.swing.*;
+
+import com.fisherevans.giflooper.App;
+import com.fisherevans.giflooper.GIFLooper;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -40,7 +44,7 @@ public class Menu extends JMenuBar implements ActionListener {
             if(GIFLooper.confirm("Are you sure you want to open a new GIF? Any unsaved work will be lost."))
                 GIFLooper.loadOpen();
         } else if(e.getSource() == _saveItem) {
-            GIFLooper.error("Save - TODO");
+        	App.current.saveProjectFile();
         } else if(e.getSource() == _exportItem) {
             GIFLooper.error("Export - TODO");
         } else if(e.getSource() == _settingsItem) {

@@ -8,8 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import com.fisherevans.giflooper.panels.OpenPanel;
-import com.fisherevans.giflooper.panels.project.ProjectPanel;
+import com.fisherevans.giflooper.app.events.EventRouter;
 
 public class GIFLooper {
 	public static JFrame activeFrame = null;
@@ -18,8 +17,9 @@ public class GIFLooper {
 	
 	public static void loadProject() {
 		closeActiveFrame();
+		EventRouter.init();
 		activeFrame = new JFrame("GIF Looper - Project Editor");
-		activeFrame.add(new ProjectPanel());
+		activeFrame.add(new App());
 		displayActiveFrame();
         activeFrame.setMinimumSize(new Dimension(800, 600));
 	}
@@ -27,7 +27,7 @@ public class GIFLooper {
 	public static void loadOpen() {
 		closeActiveFrame();
 		activeFrame = new JFrame("GIF Looper - Open Project");
-		activeFrame.add(new OpenPanel());
+		activeFrame.add(new Open());
 		displayActiveFrame();
         activeFrame.setResizable(false);
 	}
@@ -51,6 +51,11 @@ public class GIFLooper {
 	public static void error(String message) {
 		JOptionPane.showMessageDialog(activeFrame,
 				message, "Error", JOptionPane.WARNING_MESSAGE);
+	}
+	
+	public static void message(String message) {
+		JOptionPane.showMessageDialog(activeFrame,
+				message, "Information", JOptionPane.INFORMATION_MESSAGE);
 	}
 
     public static boolean confirm(String message) {

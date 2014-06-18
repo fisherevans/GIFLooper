@@ -1,4 +1,4 @@
-package com.fisherevans.giflooper.panels;
+package com.fisherevans.giflooper;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,12 +11,11 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import com.fisherevans.giflooper.GIFLooper;
+import javax.swing.filechooser.FileFilter;
 
 import net.miginfocom.swing.MigLayout;
 
-public class OpenPanel extends JPanel {
+public class Open extends JPanel {
 	private static final long serialVersionUID = -2146004416751024171L;
 	
 	private FileChooserListener _fileChooserListener;
@@ -28,10 +27,11 @@ public class OpenPanel extends JPanel {
 	private JFileChooser _fileChooser;
 	
 	private JPanel _fileChooserPanel;
+	private FileTypeFilter _filterGif, _filterGlp;
 	
 	private File _gif = null, _settings = null;
 	
-	public OpenPanel() {
+	public Open() {
 		super(new MigLayout("fillx"));
 
 		_fileChooserListener = new FileChooserListener();
@@ -50,6 +50,8 @@ public class OpenPanel extends JPanel {
 		_openButton = getButton("Open", _openListener);
 		
 		_fileChooser = new JFileChooser();
+		_filterGif = new FileTypeFilter(".gif", "Graphics Interchange Format");
+		_filterGlp = new FileTypeFilter(".glp", "GIFLooper Project");
 		
 		_fileChooserPanel = new JPanel(new MigLayout("fillx"));
 		
@@ -67,7 +69,7 @@ public class OpenPanel extends JPanel {
 
 		add(_fileChooserPanel, "width 100%, wrap");
 		add(_messageLabel, "gapbottom 10, width 100%, wrap");
-		add(_openButton, "width 100%, wrap");
+		add(_openButton, "gapleft 33%, width 33%, gapright 33%, wrap");
 	}
 	
 	private JLabel getLabel(String text) { 
@@ -109,7 +111,13 @@ public class OpenPanel extends JPanel {
 	private class FileChooserListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			int status = _fileChooser.showDialog(GIFLooper.activeFrame, "Select");
+			for(FileFilter ff:_fileChooser.getChoosableFileFilters())
+				_fileChooser.removeChoosableFileFilter(ff);
+			if(event.getSource() == _gifButton)
+				_fileChooser.addChoosableFileFilter(_filterGif);
+			else
+				_fileChooser.addChoosableFileFilter(_filterGlp);
+			int status = _fileChooser.showDialog(GIFLooper.activeFrame, "Select a file...");
 			if(status == JFileChooser.APPROVE_OPTION) {
 				File selectedFile = _fileChooser.getSelectedFile();
 				if(event.getSource() == _gifButton) {
@@ -134,5 +142,26 @@ public class OpenPanel extends JPanel {
 			} else
 				GIFLooper.error("The GIF you selected does not exist.");
 		}
+	}
+	
+	private class FileTypeFilter extends FileFilter {
+	    private String extension;
+	    private String description;
+	 
+	    public FileTypeFilter(String extension, String description) {
+	        this.extension = extension;
+	        this.description = description;
+	    }
+	 
+	    public boolean accept(File file) {
+	        if (file.isDirectory()) {
+	            return true;
+	        }
+	        return file.getName().endsWith(extension);
+	    }
+	 
+	    public String getDescription() {
+	        return description + String.format(" (*%s)", extension);
+	    }
 	}
 }

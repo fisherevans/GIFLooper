@@ -1,7 +1,10 @@
-package com.fisherevans.giflooper.components;
+package com.fisherevans.giflooper.app.components;
 
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.*;
+
+import com.fisherevans.giflooper.App;
 
 public class Project implements Serializable {
 	private static final long serialVersionUID = -2028594137369529380L;
@@ -9,16 +12,12 @@ public class Project implements Serializable {
 	public int frameCount;
 	public List<Anchor> _anchors;
 	public Settings settings;
-
-    public static Project get;
 	
 	public Project(int frameCount) {
 		this.frameCount = frameCount;
 		_anchors = new ArrayList<Anchor>();
 		loadDefaults();
 		settings = new Settings();
-
-        get = this;
 	}
 	
 	private void loadDefaults() {
@@ -34,7 +33,7 @@ public class Project implements Serializable {
         return addAnchor(anchor.copy(frameId));
     }
 
-    private boolean addAnchor(Anchor anchor) {
+    public boolean addAnchor(Anchor anchor) {
         for(Anchor temp:_anchors)
             if(temp.frameID == anchor.frameID)
                 return false;
@@ -62,7 +61,19 @@ public class Project implements Serializable {
         }
     }
 
+    public void removeAnchor(Anchor anchor) {
+    	_anchors.remove(anchor);
+    }
+
     public void sort() {
         Collections.sort(_anchors);
     }
+
+	public Anchor getNextAnchor(int shift) {
+		int nextId = _anchors.indexOf(App.current.activeAnchor) + shift;
+		nextId %= _anchors.size();
+		if(nextId < 0)
+			nextId += _anchors.size();
+		return _anchors.get(nextId);
+	}
 }

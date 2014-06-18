@@ -1,4 +1,4 @@
-package com.fisherevans.giflooper.events;
+package com.fisherevans.giflooper.app.events;
 
 import java.util.*;
 
@@ -13,13 +13,13 @@ public class EventRouter {
         _listeners = new HashMap<EventType, Set<EventRouterListener>>();
     }
 
-    public void addListener(EventRouterListener listener, EventType eventType) {
+    public static void addListener(EventRouterListener listener, EventType eventType) {
         if(_listeners.get(eventType) == null)
             _listeners.put(eventType, new HashSet<EventRouterListener>());
         _listeners.get(eventType).add(listener);
     }
 
-    public void removeListener(EventRouterListener listener, EventType eventType) {
+    public static void removeListener(EventRouterListener listener, EventType eventType) {
         if(_listeners.get(eventType) == null)
             return;
         _listeners.get(eventType).remove(listener);
@@ -31,11 +31,10 @@ public class EventRouter {
         if(_listeners.get(eventType) == null)
             return;
         for(EventRouterListener listener:_listeners.get(eventType))
-            if(listener != source)
-                listener.event(object);
+        	listener.event(eventType, source, object);
     }
 
     public interface EventRouterListener {
-        public void event(Object obj);
+        public void event(EventType eventType, Object source, Object obj);
     }
 }

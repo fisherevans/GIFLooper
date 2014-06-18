@@ -69,25 +69,6 @@ public class Window {
 		                        RenderingHints.VALUE_ANTIALIAS_ON);
 						g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
 		                        RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-						g2d.drawImage(_start, 0, 0, _start.getWidth(), _start.getHeight(), null);
-						
-						AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
-						g2d.setComposite(ac);
-						
-						double dx = _dx.getValue()/ACCR;
-						double dy = _dy.getValue()/ACCR;
-						double xscale = _xscale.getValue()/ACCR/100.0;
-						double yscale = _yscale.getValue()/ACCR/100.0;
-						double width = ((double)_end.getWidth())*xscale;
-						double height = ((double)_end.getHeight())*yscale;
-						dx += (_end.getWidth()-width)/2;
-						dy += (_end.getHeight()-height)/2;
-
-						g2d.rotate(Math.toRadians(_rot.getValue()/ACCR), width/2+dx, height/2+dy);
-						AffineTransform t = new AffineTransform();
-				        t.translate(dx, dy);
-				        t.scale(xscale, yscale); // scale = 1 
-				        g2d.drawImage(_end, t, null);
 					}
 				}
 			};
