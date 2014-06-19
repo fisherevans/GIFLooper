@@ -21,7 +21,7 @@ public class GIFLooper {
 		activeFrame = new JFrame("GIF Looper - Project Editor");
 		activeFrame.add(new App());
 		displayActiveFrame();
-        activeFrame.setMinimumSize(new Dimension(800, 600));
+        activeFrame.setMinimumSize(new Dimension(900, 700));
 	}
 	
 	public static void loadOpen() {

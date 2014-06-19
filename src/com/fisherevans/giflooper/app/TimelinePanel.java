@@ -48,6 +48,8 @@ public class TimelinePanel extends JPanel implements ActionListener, MouseMotion
     private Anchor _copiedAnchor = null;
 
     public TimelinePanel() {
+        EventRouter.addListener(this, EventType.ActiveAnchorUpdated);
+
         setBackground(Color.BLACK);
         createPopups();
         
@@ -162,9 +164,16 @@ public class TimelinePanel extends JPanel implements ActionListener, MouseMotion
             return -1;
     }
 
+    private void hoverOnSelected() {
+        _mx = (int) ((App.current.activeAnchor.frameID+0.5)*_anchorWidth);
+        _my = HEIGHT/2;
+        repaint();
+    }
+
 	@Override
 	public void event(EventType eventType, Object source, Object obj) {
-
+        if(eventType == EventType.ActiveAnchorUpdated)
+            hoverOnSelected();
 	}
 
     @Override
@@ -186,6 +195,8 @@ public class TimelinePanel extends JPanel implements ActionListener, MouseMotion
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        if(e.getX() <= 0)
+            return;
         int id = getMouseID();
         Anchor anchor = App.project.anchorByFrameID(id);
         int nextId = getMouseID(e.getX());
@@ -266,8 +277,6 @@ public class TimelinePanel extends JPanel implements ActionListener, MouseMotion
     public void mouseExited(MouseEvent e) {
     	if(_bgPopup.isVisible() || _anchorPopup.isVisible() || App.current.activeAnchor == null)
     		return;
-        _mx = (int) ((App.current.activeAnchor.frameID+0.5)*_anchorWidth);
-        _my = HEIGHT/2;
-        repaint();
+        hoverOnSelected();
     }
 }

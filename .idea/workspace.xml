@@ -2,23 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a485f31-1919-4131-801d-26be2b3ac455" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/project/timeline/TimelinePanel.java" />
-      <change type="DELETED" beforePath="D:\Development\programs\small_apps\GIFLooper\src\com\fisherevans\giflooper\components\InterploationType.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Development\programs\small_apps\GIFLooper\src\com\fisherevans\giflooper\components\Transition.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Development\programs\small_apps\GIFLooper\src\com\fisherevans\giflooper\panels\NavigationPanel.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/fisherevans/giflooper/components/Anchor.java" afterPath="$PROJECT_DIR$/src/com/fisherevans/giflooper/components/Anchor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/fisherevans/giflooper/App.java" afterPath="$PROJECT_DIR$/src/com/fisherevans/giflooper/App.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/fisherevans/giflooper/GIFLooper.java" afterPath="$PROJECT_DIR$/src/com/fisherevans/giflooper/GIFLooper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/fisherevans/giflooper/Menu.java" afterPath="$PROJECT_DIR$/src/com/fisherevans/giflooper/Menu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/OpenPanel.java" afterPath="$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/OpenPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/fisherevans/giflooper/components/Project.java" afterPath="$PROJECT_DIR$/src/com/fisherevans/giflooper/components/Project.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/fisherevans/giflooper/components/Settings.java" afterPath="$PROJECT_DIR$/src/com/fisherevans/giflooper/components/Settings.java" />
-      <change type="MOVED" beforePath="D:\Development\programs\small_apps\GIFLooper\src\com\fisherevans\giflooper\panels\PreviewPanel.java" afterPath="$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/project/PreviewPanel.java" />
-      <change type="MOVED" beforePath="D:\Development\programs\small_apps\GIFLooper\src\com\fisherevans\giflooper\panels\ProjectPanel.java" afterPath="$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/project/ProjectPanel.java" />
-      <change type="MOVED" beforePath="D:\Development\programs\small_apps\GIFLooper\src\com\fisherevans\giflooper\panels\TransitionPanel.java" afterPath="$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/project/TransitionPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/fisherevans/giflooper/app/TimelinePanel.java" afterPath="$PROJECT_DIR$/src/com/fisherevans/giflooper/app/TimelinePanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/fisherevans/giflooper/app/TransitionPanel.java" afterPath="$PROJECT_DIR$/src/com/fisherevans/giflooper/app/TransitionPanel.java" />
     </list>
     <ignored path="GIFLooper.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403046617782" ignored="false" />
+    <file path="/Dummy.txt" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403133891133" ignored="false" />
     <file path="/ProjectPanel.java" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403053999232" ignored="false" />
     <file path="/Menu.java" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403048135164" ignored="false" />
     <file path="/GIFLooper.java" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403054198230" ignored="false" />
@@ -28,7 +19,9 @@
     <file path="/fragment.java" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403049681517" ignored="false" />
     <file path="/Project.java" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403057302689" ignored="false" />
     <file path="/Settings.java" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403050545912" ignored="false" />
-    <file path="/TimelinePanel.java" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403056890173" ignored="false" />
+    <file path="/TimelinePanel.java" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403134883498" ignored="false" />
+    <file path="/App.java" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403135437125" ignored="false" />
+    <file path="/CommandPanel.java" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403137232669" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +36,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -79,7 +73,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -92,95 +85,62 @@
       <file leaf-file-name="GIFLooper.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/GIFLooper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="15" selection-start="1232" selection-end="1232" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OpenPanel.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/OpenPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="129" column="31" selection-start="3855" selection-end="3855" vertical-scroll-proportion="0.0">
+            <state line="23" column="60" selection-start="625" selection-end="625" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectPanel.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/project/ProjectPanel.java">
+      <file leaf-file-name="App.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="19" selection-start="1189" selection-end="1189" vertical-scroll-proportion="0.0">
+            <state line="97" column="13" selection-start="3341" selection-end="3341" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommandPanel.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/CommandPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="35" selection-start="147" selection-end="147" vertical-scroll-proportion="0.23367697">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Project.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/components/Project.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="13" selection-start="190" selection-end="190" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Settings.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/components/Settings.java">
+        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/components/Settings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="35" selection-start="380" selection-end="380" vertical-scroll-proportion="0.0">
+            <state line="4" column="13" selection-start="94" selection-end="94" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SettingsPanel.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/SettingsPanel.java">
+      <file leaf-file-name="TransitionPanel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/TransitionPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="13" selection-start="84" selection-end="84" vertical-scroll-proportion="0.0">
+            <state line="89" column="93" selection-start="3012" selection-end="3012" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TimelinePanel.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/project/timeline/TimelinePanel.java">
+      <file leaf-file-name="TimelinePanel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/TimelinePanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="16" selection-start="964" selection-end="964" vertical-scroll-proportion="0.342246">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Project.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/components/Project.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="33" selection-start="1647" selection-end="1647" vertical-scroll-proportion="0.0">
+            <state line="198" column="19" selection-start="7097" selection-end="7097" vertical-scroll-proportion="0.0">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Anchor.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/components/Anchor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="30" selection-start="726" selection-end="726" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EventRouter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/events/EventRouter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="37" selection-start="619" selection-end="619" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Menu.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/Menu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="37" selection-start="1041" selection-end="1041" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -203,8 +163,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/Menu.java" />
-        <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/EventRouter.java" />
         <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/events/EventRouter.java" />
         <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/ProjectPanel.java" />
         <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/components/Settings.java" />
@@ -212,11 +170,15 @@
         <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/project/NavigationPanel.java" />
         <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/project/TimelinePanel.java" />
         <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/project/ProjectPanel.java" />
-        <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/GIFLooper.java" />
         <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/OpenPanel.java" />
         <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/components/Anchor.java" />
         <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/components/Project.java" />
         <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/project/timeline/TimelinePanel.java" />
+        <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/app/TransitionPanel.java" />
+        <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/app/TimelinePanel.java" />
+        <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/GIFLooper.java" />
+        <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/App.java" />
+        <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/app/CommandPanel.java" />
       </list>
     </option>
   </component>
@@ -255,6 +217,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -323,7 +286,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="panels" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -345,81 +308,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="panels" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GIFLooper" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GIFLooper" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="giflooper" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="panels" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="timeline" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GIFLooper" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GIFLooper" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="giflooper" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="events" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GIFLooper" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GIFLooper" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="giflooper" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -443,7 +332,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -458,8 +346,8 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="FullScreen" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="dynamic.classpath" value="false" />
   </component>
@@ -506,6 +394,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -532,19 +433,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -614,31 +502,31 @@
     <frame x="76" y="-8" width="1612" height="1066" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39911798" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24967742" sideWeight="0.6703418" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -706,86 +594,52 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/events/EventType.java">
+    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/TransitionPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="23" selection-start="115" selection-end="115" vertical-scroll-proportion="0.18181819">
+        <state line="89" column="93" selection-start="3012" selection-end="3012" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/TimelinePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="198" column="19" selection-start="7097" selection-end="7097" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/GIFLooper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="15" selection-start="1232" selection-end="1232" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/project/ProjectPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="19" selection-start="1189" selection-end="1189" vertical-scroll-proportion="0.0">
+        <state line="23" column="60" selection-start="625" selection-end="625" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/Menu.java">
+    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/components/Project.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="37" selection-start="1041" selection-end="1041" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/SettingsPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="84" selection-end="84" vertical-scroll-proportion="0.0">
+        <state line="8" column="13" selection-start="190" selection-end="190" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/components/Anchor.java">
+    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/components/Settings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="30" selection-start="726" selection-end="726" vertical-scroll-proportion="0.0">
+        <state line="4" column="13" selection-start="94" selection-end="94" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/components/Settings.java">
+    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="35" selection-start="380" selection-end="380" vertical-scroll-proportion="0.0">
+        <state line="97" column="13" selection-start="3341" selection-end="3341" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/events/EventRouter.java">
+    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/CommandPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="37" selection-start="619" selection-end="619" vertical-scroll-proportion="0.0">
+        <state line="8" column="35" selection-start="147" selection-end="147" vertical-scroll-proportion="0.23367697">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/components/Project.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="33" selection-start="1647" selection-end="1647" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/OpenPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="31" selection-start="3855" selection-end="3855" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/panels/project/timeline/TimelinePanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="16" selection-start="964" selection-end="964" vertical-scroll-proportion="0.342246">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

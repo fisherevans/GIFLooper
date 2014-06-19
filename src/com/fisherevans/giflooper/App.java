@@ -82,7 +82,7 @@ public class App extends JPanel implements EventRouterListener {
             ObjectInputStream in = null;
 			try {
 				fileIn = new FileInputStream(GIFLooper.settingsFile.getAbsolutePath());
-				in = new ObjectInputStream(fileIn);
+                in = new ObjectInputStream(fileIn);
 				project = (Project) in.readObject();
                 in.close();
                 fileIn.close();
@@ -148,7 +148,7 @@ public class App extends JPanel implements EventRouterListener {
 
 	private void loadTransitionPanel() {
 		_transitionPanel = new TransitionPanel();
-		add(_transitionPanel, "grow");
+		add(_transitionPanel, "pos 0px " + TimelinePanel.HEIGHT + " (100%-" + AnchorPanel.WIDTH + "px) 100%");
 	}
 	
 	private void forceCloseProject(String message) {

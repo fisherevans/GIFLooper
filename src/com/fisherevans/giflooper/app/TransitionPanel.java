@@ -86,8 +86,8 @@ public class TransitionPanel extends JPanel implements ChangeListener, EventRout
 			if(globalScale > 1)
 				globalScale = 1;
 
-			double globalDX = (getWidth()-App.current.gifWidth*globalScale)/2.0;
-			double globalDY = (getHeight()-App.current.gifHeight*globalScale)/2.0;
+			double globalDX = (getWidth()-App.current.gifWidth*globalScale)/2.0*globalScale;
+			double globalDY = (getHeight()-App.current.gifHeight*globalScale)/2.0*globalScale;
 
 			draw(g2d, otherAnchor, otherImg, globalScale, globalDX, globalDY, 1);
 			draw(g2d, thisAnchor, thisImg, globalScale, globalDX, globalDY, 1f-(float)alpha);
