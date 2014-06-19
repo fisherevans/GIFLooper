@@ -1,6 +1,7 @@
 package com.fisherevans.giflooper;
 
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.io.File;
 
@@ -21,7 +22,9 @@ public class GIFLooper {
 		activeFrame = new JFrame("GIF Looper - Project Editor");
 		activeFrame.add(new App());
 		displayActiveFrame();
-        activeFrame.setMinimumSize(new Dimension(900, 700));
+		activeFrame.setMinimumSize(new Dimension(800, activeFrame.getHeight()));
+		activeFrame.pack();
+		GIFLooper.center(activeFrame);
 	}
 	
 	public static void loadOpen() {

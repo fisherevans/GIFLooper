@@ -1,10 +1,13 @@
 package com.fisherevans.giflooper.app;
 
 import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Composite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JLabel;
@@ -28,6 +31,7 @@ public class TransitionPanel extends JPanel implements ChangeListener, EventRout
 	
 	public TransitionPanel() {
 		super(new MigLayout("fill"));
+		setBackground(Color.WHITE);
 		createSlider();
 		_viewer = new TransitionViewer();
 		add(_viewer, "width 100%, height 96%");
@@ -42,6 +46,7 @@ public class TransitionPanel extends JPanel implements ChangeListener, EventRout
 		JSlider transitionSlider = new JSlider(-100, 100, 50);
 		transitionSlider.addChangeListener(this);
 		JPanel sliderPanel = new JPanel(new MigLayout("fill"));
+		sliderPanel.setBackground(Color.WHITE);
 		sliderPanel.add(new JLabel("Left", JLabel.RIGHT), "gapleft 20%, width 5%");
 		sliderPanel.add(transitionSlider, "width 50%");
 		sliderPanel.add(new JLabel("Right", JLabel.LEFT), "gapright 20%, width 5%");
@@ -82,18 +87,23 @@ public class TransitionPanel extends JPanel implements ChangeListener, EventRout
 			BufferedImage otherImg = App.current.decoder.getFrame(otherAnchor.frameID);
 			double alpha = Math.abs(_alpha);
 			
-			double globalScale = getWidth()/(double)App.current.gifWidth;
+			double globalScale = Math.min(getWidth()/(double)App.current.gifWidth,
+					getHeight()/(double)App.current.gifHeight);
 			if(globalScale > 1)
 				globalScale = 1;
 
-			double globalDX = (getWidth()-App.current.gifWidth*globalScale)/2.0*globalScale;
-			double globalDY = (getHeight()-App.current.gifHeight*globalScale)/2.0*globalScale;
+			double globalDX = (getWidth()-App.current.gifWidth*globalScale)/2.0;
+			double globalDY = (getHeight()-App.current.gifHeight*globalScale)/2.0;
 
-			draw(g2d, otherAnchor, otherImg, globalScale, globalDX, globalDY, 1);
-			draw(g2d, thisAnchor, thisImg, globalScale, globalDX, globalDY, 1f-(float)alpha);
+			draw(g2d, thisAnchor, thisImg, globalScale, globalDX, globalDY, 1);
+			draw(g2d, otherAnchor, otherImg, globalScale, globalDX, globalDY, (float)alpha);
+			drawBorder(g2d, globalScale, globalDX, globalDY);
 		}
 	    
 	    private void draw(Graphics2D g2d, Anchor anchor, BufferedImage img, double globalScale, double globalDX, double globalDY, float alpha) {
+	    	Composite oldC = g2d.getComposite();
+			AffineTransform oldT = g2d.getTransform();
+	    	
 			AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
 			g2d.setComposite(ac);
 			double dx = anchor.deltaX;
@@ -102,14 +112,25 @@ public class TransitionPanel extends JPanel implements ChangeListener, EventRout
 			double yscale = anchor.scaleY*globalScale;
 			double width = App.current.gifWidth*xscale;
 			double height = App.current.gifHeight*yscale;
-			dx += (App.current.gifWidth-width)/2.0 + globalDX;
-			dy += (App.current.gifHeight-height)/2.0 + globalDY;
-			
+			dx += globalDX;
+			dy += globalDY;
+
 			g2d.rotate(Math.toRadians(anchor.degrees), width/2.0 + dx, height/2.0 + dy);
 			AffineTransform at = new AffineTransform();
-			at.translate(dx, dy);
+			at.translate(dx*globalScale, dy*globalScale);
 			at.scale(xscale, yscale);
 	        g2d.drawImage(img, at, null);
+	        
+	        g2d.setTransform(oldT);
+	        g2d.setComposite(oldC);
+	    }
+	    
+	    private void drawBorder(Graphics2D g2d, double globalScale, double globalDX, double globalDY) {
+			double width = App.current.gifWidth*globalScale;
+			double height = App.current.gifHeight*globalScale;
+			g2d.setColor(Color.BLACK);
+	        g2d.setStroke(new BasicStroke(2f));
+	        g2d.draw(new Rectangle2D.Double(globalDX*globalScale+1, globalDY*globalScale+1, width-2, height-2));
 	    }
 	}
 }

@@ -9,7 +9,7 @@ public class Settings implements Serializable {
     public double speed;
 	
 	public Settings() {
-		clearEachFrame = false;
+		clearEachFrame = true;
 		aa = true;
 		graphicsInterpolation = true;
         speed = 1;

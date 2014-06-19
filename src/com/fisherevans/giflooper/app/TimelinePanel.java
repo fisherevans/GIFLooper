@@ -1,10 +1,8 @@
 package com.fisherevans.giflooper.app;
 
-import com.fisherevans.giflooper.GIFLooper;
 import com.fisherevans.giflooper.GraphicsUtil;
 import com.fisherevans.giflooper.App;
 import com.fisherevans.giflooper.app.components.Anchor;
-import com.fisherevans.giflooper.app.components.Project;
 import com.fisherevans.giflooper.app.events.EventRouter;
 import com.fisherevans.giflooper.app.events.EventType;
 import com.fisherevans.giflooper.app.events.EventRouter.EventRouterListener;
@@ -17,30 +15,26 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 
 public class TimelinePanel extends JPanel implements ActionListener, MouseMotionListener, MouseListener, EventRouterListener {
-    private static final Color ODD_IDLE = new Color(230, 230, 230);
-    private static final Color EVEN_IDLE = new Color(215, 215, 215);
-
-    private static final Color ODD_HOVER = new Color(182, 195, 214);
-    private static final Color EVEN_HOVER = new Color(195, 210, 230);
-
-    private static final Color ODD_ANCHOR_IDLE = new Color(107, 152, 214);
-    private static final Color EVEN_ANCHOR_IDLE = new Color(115, 163, 230);
-
-    private static final Color ODD_ANCHOR_HOVER = new Color(54, 120, 214);
-    private static final Color EVEN_ANCHOR_HOVER = new Color(57, 129, 230);
-
-    private static final Color ODD_SELECTED_IDLE = new Color(214, 170, 107);
-    private static final Color EVEN_SELECTED_IDLE = new Color(230, 182, 115);
-
-    private static final Color ODD_SELECTED_HOVER = new Color(214, 148, 54);
-    private static final Color EVEN_SELECTED_HOVER = new Color(230, 159, 58);
-
-    public static final int HEIGHT = 100;
+    private enum FrameType {
+    	Normal(new Color(230, 230, 230), new Color(182, 195, 214)),
+    	Anchor(new Color(107, 152, 214), new Color(54, 120, 214)),
+    	Selected(new Color(214, 170, 107), new Color(214, 148, 54));
+    	
+    	private Color _idle, _hover;
+    	
+    	FrameType(Color idle, Color hover) {
+    		_idle = idle;
+    		_hover = hover;
+    	}
+    	
+    	public Color getColor(boolean hover) {
+    		return hover ? _hover : _idle;
+    	}
+    }
 
     private JPopupMenu _bgPopup, _anchorPopup;
     private JMenuItem _newAnchor, _pasteAnchor, _copyAnchor, _deleteAnchor;
 
-    private int _thumbWidth, _thumbHeight;
     private double _anchorWidth = 1;
 
     private int _mx, _my;
@@ -55,9 +49,6 @@ public class TimelinePanel extends JPanel implements ActionListener, MouseMotion
         
         addMouseMotionListener(this);
         addMouseListener(this);
-
-        _thumbHeight = HEIGHT;
-        _thumbWidth = (int) ((App.current.gifWidth/((double)App.current.gifHeight))*HEIGHT);
     }
 
     private void createPopups() {
@@ -84,73 +75,42 @@ public class TimelinePanel extends JPanel implements ActionListener, MouseMotion
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        int thumbWidth = (int) ((App.current.gifWidth/((double)App.current.gifHeight))*getHeight());
+        
         Graphics2D g2d = GraphicsUtil.getG2D(g);
-        _anchorWidth = (getWidth()-_thumbWidth)/(double)App.project.frameCount;
-        boolean even, hover;
+        _anchorWidth = (getWidth()-thumbWidth)/(double)App.project.frameCount;
+        boolean hover;
         Color c;
         int frameId = -1;
         double did;
         for(int id = 0;id < App.project.frameCount;id++) {
             did = id;
-            even = id % 2 == 0;
             hover = _mx >= did*_anchorWidth && _mx < (did+1.0)*_anchorWidth;
-            c = getColor(even, hover, App.project.anchorByFrameID(id) != null, App.current.activeAnchor == App.project.anchorByFrameID(id));
+            if(App.project.anchorByFrameID(id) == null)
+            	c = FrameType.Normal.getColor(hover);
+            else if(App.current.activeAnchor == App.project.anchorByFrameID(id))
+            	c = FrameType.Selected.getColor(hover);
+        	else 
+            	c = FrameType.Anchor.getColor(hover);
             g2d.setColor(c);
-            g2d.fill(new Rectangle2D.Double(did*_anchorWidth, 0, _anchorWidth, HEIGHT));
+            g2d.fill(new Rectangle2D.Double(did*_anchorWidth, 0, _anchorWidth, getHeight()));
             g2d.setColor(Color.BLACK);
-            g2d.fill(new Rectangle2D.Double((did+1)*_anchorWidth - 1, 0, 1, HEIGHT));
+            g2d.fill(new Rectangle2D.Double((did+1)*_anchorWidth - 1, 0, 1, getHeight()));
             if(hover)
                 frameId = id;
         }
         if(frameId != -1) {
 			AffineTransform t = new AffineTransform();
-	        double scale = HEIGHT/(double)App.current.gifHeight;
+	        double scale = getHeight()/(double)App.current.gifHeight;
 	        t.scale(scale, scale);
 	        t.translate(getWidth()/scale - (double)App.current.gifWidth, 0);
 	        g2d.drawImage(App.current.decoder.getFrame(frameId), t, null);
         }
         g2d.setColor(Color.BLACK);
-        g2d.fill(new Rectangle2D.Double(App.project.frameCount*_anchorWidth - 1, 0, 2, HEIGHT));
-    }
-
-    private Color getColor(boolean even, boolean hover, boolean anchor, boolean selected) {
-        if(even) {
-            if(hover) {
-                if(anchor) {
-                	if(selected)
-                		return EVEN_SELECTED_HOVER;
-                	else 
-                		return EVEN_ANCHOR_HOVER;
-                } else
-                    return EVEN_HOVER;
-            } else {
-                if(anchor) {
-                	if(selected)
-                		return EVEN_SELECTED_IDLE;
-                	else 
-                		return EVEN_ANCHOR_IDLE;
-                } else
-                    return EVEN_IDLE;
-            }
-        } else {
-            if(hover) {
-                if(anchor) {
-                	if(selected)
-                		return ODD_SELECTED_HOVER;
-                	else 
-                		return ODD_ANCHOR_HOVER;
-                } else
-                    return ODD_HOVER;
-            } else {
-                if(anchor) {
-                	if(selected)
-                		return ODD_SELECTED_IDLE;
-                	else 
-                		return ODD_ANCHOR_IDLE;
-                } else
-                    return ODD_IDLE;
-            }
-        }
+        g2d.fill(new Rectangle2D.Double(App.project.frameCount*_anchorWidth - 1, 0, 2, getHeight()));
+        g2d.setStroke(new BasicStroke(1f));
+        g2d.draw(new Rectangle2D.Double(0, 0, getWidth()-1, getHeight()-1));
     }
 
     private int getMouseID() {
@@ -165,8 +125,10 @@ public class TimelinePanel extends JPanel implements ActionListener, MouseMotion
     }
 
     private void hoverOnSelected() {
+    	if(App.current.activeAnchor == null)
+    		return;
         _mx = (int) ((App.current.activeAnchor.frameID+0.5)*_anchorWidth);
-        _my = HEIGHT/2;
+        _my = getHeight()/2;
         repaint();
     }
 
@@ -207,6 +169,7 @@ public class TimelinePanel extends JPanel implements ActionListener, MouseMotion
                 _my = e.getY();
                 anchor.frameID = nextId;
                 App.project.sort();
+            	EventRouter.event(this, EventType.AnchorSelected, anchor);
                 EventRouter.event(this, EventType.ActiveAnchorUpdated, null);
             }
             if(anchor == null) {

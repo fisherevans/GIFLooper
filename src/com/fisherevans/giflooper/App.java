@@ -1,16 +1,35 @@
 package com.fisherevans.giflooper;
 
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.util.List;
 import java.util.logging.Logger;
 
+import javax.swing.BorderFactory;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 
 import com.fisherevans.giflooper.app.AnchorPanel;
 import com.fisherevans.giflooper.app.AppWindowListener;
+import com.fisherevans.giflooper.app.CommandPanel;
 import com.fisherevans.giflooper.app.Menu;
 import com.fisherevans.giflooper.app.TimelinePanel;
 import com.fisherevans.giflooper.app.TransitionPanel;
@@ -31,14 +50,15 @@ public class App extends JPanel implements EventRouterListener {
 	private Logger log = Logger.getLogger(App.class.getName());
 
     public GifDecoder decoder;
-    public GifEncoder encoder;
 
     public int gifWidth, gifHeight;
 
     private Menu _menu;
     private TimelinePanel _timelinePanel;
-    private AnchorPanel _anchorPanel;
     private TransitionPanel _transitionPanel;
+    private JPanel _bottomPanel, _rightPanel;
+    private AnchorPanel _anchorPanel;
+    private CommandPanel _commandPanel;
     
     public Anchor activeAnchor = null;
 	
@@ -56,10 +76,7 @@ public class App extends JPanel implements EventRouterListener {
         
 		openDecoder();
 		openProjectFile();
-        loadMenu();
-        loadTimelinePanel();
-        loadAnchorPanel();
-        loadTransitionPanel();
+        loadComponents();
 	}
 
 	private void openDecoder() {
@@ -131,25 +148,34 @@ public class App extends JPanel implements EventRouterListener {
         GIFLooper.message("Project saved.");
 	}
 
-    private void loadMenu() {
+    private void loadComponents() {
         _menu = new Menu();
         GIFLooper.activeFrame.setJMenuBar(_menu);
-    }
-
-    private void loadTimelinePanel() {
+        
         _timelinePanel = new TimelinePanel();
-        add(_timelinePanel, "height " + TimelinePanel.HEIGHT + "px, dock north, gapbottom 4px");
-    }
-    
-    private void loadAnchorPanel() {
-    	_anchorPanel = new AnchorPanel();
-        add(_anchorPanel, "width " + AnchorPanel.WIDTH + "px, dock east, gapleft 4px");
-    }
-
-	private void loadTransitionPanel() {
+        add(_timelinePanel, "height 100px, width 100%, wrap");
+        
+    	_bottomPanel = new JPanel(new MigLayout("fill, insets 0"));
+    	_bottomPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
+        add(_bottomPanel, "height 100%-100px, width 100%, wrap");
+        
 		_transitionPanel = new TransitionPanel();
-		add(_transitionPanel, "pos 0px " + TimelinePanel.HEIGHT + " (100%-" + AnchorPanel.WIDTH + "px) 100%");
-	}
+		_transitionPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+		_bottomPanel.add(_transitionPanel, "width 70%, height 100%");
+
+    	_rightPanel = new JPanel(new MigLayout("fillx, insets 0"));
+    	_rightPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
+    	
+    	_anchorPanel = new AnchorPanel();
+    	_anchorPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+        _rightPanel.add(_anchorPanel, "width 100%, wrap");
+        
+    	_commandPanel = new CommandPanel();
+    	_commandPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+        _rightPanel.add(_commandPanel, "width 100%, wrap");
+        
+        _bottomPanel.add(_rightPanel, "width 30%, height 100%, wrap");
+    }
 	
 	private void forceCloseProject(String message) {
 		if(message != null)
@@ -167,7 +193,15 @@ public class App extends JPanel implements EventRouterListener {
 		} else if(eventType == EventType.AnchorAdded)  {
         	project.addAnchor((Anchor)obj);
 		} else if(eventType == EventType.ActiveAnchorUpdated)  {
+			project.sort();
         	repaint();
 		}
+	}
+
+	public void export() {
+		String file = GIFLooper.gifFile.getAbsolutePath().replace(".gif", ".out.gif");
+		file = JOptionPane.showInputDialog("Please enter a filename", file);
+		if(file != null)
+			GIFSaver.save(false, file, App.project, App.current.decoder, App.current.gifWidth, App.current.gifHeight);
 	}
 }

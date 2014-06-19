@@ -76,4 +76,8 @@ public class Project implements Serializable {
 			nextId += _anchors.size();
 		return _anchors.get(nextId);
 	}
+
+	public List<Anchor> getAnchors() {
+		return _anchors;
+	}
 }

@@ -23,8 +23,6 @@ import com.fisherevans.giflooper.app.events.EventRouter.EventRouterListener;
 import com.fisherevans.giflooper.app.events.EventType;
 
 public class AnchorPanel extends JPanel implements EventRouterListener {
-	public static final int WIDTH = 300;
-	
 	private Map<String, InputRow> _inputs;
 	private Anchor _anchor;
 	

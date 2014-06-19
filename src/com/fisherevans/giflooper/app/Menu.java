@@ -46,7 +46,7 @@ public class Menu extends JMenuBar implements ActionListener {
         } else if(e.getSource() == _saveItem) {
         	App.current.saveProjectFile();
         } else if(e.getSource() == _exportItem) {
-            GIFLooper.error("Export - TODO");
+            App.current.export();
         } else if(e.getSource() == _settingsItem) {
             GIFLooper.error("Settings - TODO");
         } else if(e.getSource() == _quitItem) {
