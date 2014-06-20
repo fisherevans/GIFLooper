@@ -1,5 +1,6 @@
 package com.fisherevans.giflooper.app.components;
 
+import java.awt.geom.AffineTransform;
 import java.io.Serializable;
 
 public class Anchor implements Comparable<Anchor>, Serializable {

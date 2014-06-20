@@ -18,7 +18,7 @@ public class SettingsFrame extends JFrame implements ActionListener {
     private final static int SPEED_SCALE = 100;
 
 	private JPanel _rootPanel, _speedPanel, _buttonPanel;
-	private JCheckBox _clear, _aa, _graphics;
+	private JCheckBox _clear, _aa, _graphics, _cosine;
 	private JLabel _speedLabel;
 	private JSlider _speedSlider;
     private JTextField _speedField;
@@ -51,9 +51,11 @@ public class SettingsFrame extends JFrame implements ActionListener {
         _clear = new JCheckBox("Clear GIF Each Frame", App.project.settings.clearEachFrame);
         _aa = new JCheckBox("Use Antialiasing", App.project.settings.aa);
         _graphics = new JCheckBox("Use Graphical Interpolation", App.project.settings.graphicsInterpolation);
+        _cosine = new JCheckBox("Use Cosine Time Interpolation", App.project.settings.timeCosineInterpolation);
         _rootPanel.add(_clear, "width 100%, wrap");
         _rootPanel.add(_aa, "width 100%, wrap");
         _rootPanel.add(_graphics, "width 100%, wrap");
+        _rootPanel.add(_cosine, "width 100%, wrap");
 
         _speedPanel = new JPanel(new MigLayout("fillx"));
         _speedLabel = new JLabel("Exported GIF Speed");
@@ -88,6 +90,7 @@ public class SettingsFrame extends JFrame implements ActionListener {
         App.project.settings.clearEachFrame = _clear.isSelected();
         App.project.settings.aa = _aa.isSelected();
         App.project.settings.graphicsInterpolation = _graphics.isSelected();
+        App.project.settings.timeCosineInterpolation = _cosine.isSelected();
         App.project.settings.speed = _speedSlider.getValue()/(double)SPEED_SCALE;
         close();
 	}
