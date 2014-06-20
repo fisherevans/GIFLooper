@@ -48,7 +48,7 @@ public class Menu extends JMenuBar implements ActionListener {
         } else if(e.getSource() == _exportItem) {
             App.current.export();
         } else if(e.getSource() == _settingsItem) {
-            GIFLooper.error("Settings - TODO");
+            new SettingsFrame();
         } else if(e.getSource() == _quitItem) {
             if(GIFLooper.confirm("Are you sure you want to quit? Any unsaved work will be lost.")) {
                 GIFLooper.closeActiveFrame();

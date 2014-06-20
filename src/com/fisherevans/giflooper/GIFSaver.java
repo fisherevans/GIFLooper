@@ -1,8 +1,6 @@
 package com.fisherevans.giflooper;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -45,49 +43,52 @@ public class GIFSaver {
 			encoder.setQuality(20);
 			encoder.setRepeat(decoder.getLoopCount());
 			if(encoder.start(saveFile.getAbsolutePath())) {
-				double value, dx, dy, xscale, yscale, width, height, rotation;
+				double value, dx, dy, xScale, yScale, width, height, rotation;
 				Anchor left, right;
 				BufferedImage img, imgOut = new BufferedImage(gifWidth, gifHeight, BufferedImage.TYPE_INT_RGB);
 				Graphics2D gfx = GraphicsUtil.getG2D(imgOut.createGraphics());
+                gfx.setColor(Color.BLACK);
 
 				int count = anchors.get(anchors.size()-1).frameID - anchors.get(0).frameID;
 				int start = anchors.get(0).frameID;
 				int anchorId = 0;
-				for(int id = 0;id < count;id++) {
+				for(int id = 0;id <= count;id++) {
+                    AffineTransform oldT = gfx.getTransform();
+                    Composite oldC = gfx.getComposite();
+
 					int frameId = start + id;
 					left = anchors.get(anchorId);
 					right = anchors.get(anchorId+1);
 					img = decoder.getFrame(frameId);
 					value = (frameId-left.frameID)/(double)(right.frameID-left.frameID);
-					
-					dx = interp(left.deltaX, right.deltaX, value);
-					dy = interp(left.deltaY, right.deltaY, value);
-					xscale = interp(left.scaleX, right.scaleX, value);
-					yscale = interp(left.scaleY, right.scaleY, value);
-					width = gifWidth*xscale;
-					height = gifHeight*yscale;
-					rotation = interp(left.degrees, right.degrees, value);
-					
-					dx += (gifWidth-width)/2.0;
-					dy += (gifHeight-height)/2.0;
-					
-					if(App.project.settings.clearEachFrame) {
-						gfx.setColor(Color.BLACK);
-						gfx.fillRect(0, 0, imgOut.getWidth(), imgOut.getHeight());
-					}
 
-					AffineTransform old = gfx.getTransform();
+                    xScale = interp(left.scaleX, right.scaleX, value);
+                    yScale = interp(left.scaleY, right.scaleY, value);
+                    width = gifWidth*xScale;
+                    height = gifHeight*yScale;
+					dx = interp(left.deltaX, right.deltaX, value) + (gifWidth-width)/2.0;
+					dy = interp(left.deltaY, right.deltaY, value) + (gifHeight-height)/2.0;
+                    rotation = interp(left.degrees, right.degrees, value);
+
+					if(App.project.settings.clearEachFrame)
+						gfx.fillRect(0, 0, imgOut.getWidth(), imgOut.getHeight());
+
 					gfx.rotate(Math.toRadians(rotation), width/2.0+dx, height/2.0+dy);
 					AffineTransform t = new AffineTransform();
 			        t.translate(dx, dy);
-			        t.scale(xscale, yscale);
+			        t.scale(xScale, yScale);
 			        gfx.drawImage(img, t, null);
-					gfx.setTransform(old);
-					
-					encoder.setDelay(decoder.getDelay(frameId));
+
+                    int delay = (int) (decoder.getDelay(frameId)/App.project.settings.speed);
+					encoder.setDelay(delay < 1 ? 1 : delay);
 					encoder.addFrame(imgOut);
-					
+
 					bar.setValue((int)((id/(double)count)*100));
+                    if(frameId == right.frameID)
+                        anchorId++;
+
+                    gfx.setComposite(oldC);
+                    gfx.setTransform(oldT);
 				}
 				if(!encoder.finish())
 					return errorMsg;
