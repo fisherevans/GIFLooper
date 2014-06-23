@@ -16,9 +16,10 @@ import java.awt.geom.Rectangle2D;
 
 public class TimelinePanel extends JPanel implements ActionListener, MouseMotionListener, MouseListener, EventRouterListener {
     private enum FrameType {
-    	Normal(new Color(230, 230, 230), new Color(182, 195, 214)),
-    	Anchor(new Color(107, 152, 214), new Color(54, 120, 214)),
-    	Selected(new Color(214, 170, 107), new Color(214, 148, 54));
+    	Exclude(new Color(100, 100, 100), new Color(130, 130, 130)),
+    	Normal(new Color(225, 225, 225), new Color(255, 255, 255)),
+    	Anchor(new Color(0, 106, 224), new Color(0, 120, 255)),
+    	Selected(new Color(224, 112, 0), new Color(255, 128, 0));
     	
     	private Color _idle, _hover;
     	
@@ -83,16 +84,22 @@ public class TimelinePanel extends JPanel implements ActionListener, MouseMotion
         boolean hover;
         Color c;
         int frameId = -1;
+        int anchorId = 0;
         double did;
         for(int id = 0;id < App.project.frameCount;id++) {
             did = id;
             hover = _mx >= did*_anchorWidth && _mx < (did+1.0)*_anchorWidth;
-            if(App.project.anchorByFrameID(id) == null)
+            if(App.project.anchorByFrameID(id) == null) {
             	c = FrameType.Normal.getColor(hover);
-            else if(App.current.activeAnchor == App.project.anchorByFrameID(id))
-            	c = FrameType.Selected.getColor(hover);
-        	else 
-            	c = FrameType.Anchor.getColor(hover);
+	            if(anchorId == 0 || anchorId >= App.project.getAnchors().size())
+	            	c = FrameType.Exclude.getColor(hover);
+            } else {
+            	anchorId++;
+            	if(App.current.activeAnchor == App.project.anchorByFrameID(id))
+                	c = FrameType.Selected.getColor(hover);
+            	else 
+                	c = FrameType.Anchor.getColor(hover);
+            }
             g2d.setColor(c);
             g2d.fill(new Rectangle2D.Double(did*_anchorWidth, 0, _anchorWidth, getHeight()));
             g2d.setColor(Color.BLACK);

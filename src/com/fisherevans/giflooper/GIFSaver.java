@@ -67,6 +67,7 @@ public class GIFSaver {
 					transforms.add(transform);
 					
 					bounds = transform.createTransformedShape(shape).getBounds();
+					System.out.println(bounds);
 					x1 = Math.min((int) bounds.getX(), x1);
 					y1 = Math.max((int) bounds.getY(), y1);
 					x2 = Math.max((int) (bounds.getX()+bounds.getWidth()), x2);
@@ -77,11 +78,12 @@ public class GIFSaver {
 			        bar.setValue((frameId-start)/bar.getMaximum()); // GUI
 				}
 				BufferedImage imgOut = new BufferedImage(x2-x1, y1-y2, BufferedImage.TYPE_INT_RGB);
+				System.out.printf("x1:%d, y1:%d, x2:%d, y2:%d\n", x1, y1, x2, y2);
 				Graphics2D gfx = GraphicsUtil.getG2D(imgOut.createGraphics());
                 gfx.setColor(Color.BLACK);
 				for(FrameTransform transform:transforms) {
 					BufferedImage img = decoder.getFrame(transform.getFrameId());
-					//transform.translate(x1, y1);
+					transform.translate(-x1, y1);
 					if(App.project.settings.clearEachFrame)
 						gfx.fillRect(0, 0, imgOut.getWidth(), imgOut.getHeight());
 			        gfx.drawImage(img, transform, null);
@@ -165,7 +167,7 @@ public class GIFSaver {
 	public static FrameTransform getInterpolatedTransformation(Anchor left, Anchor right, int width, int height, double time, boolean cosine, int frameId) {
 		// get the interpolated values from the two anchors
 		double deltaX = interp(left.deltaX, right.deltaX, time, cosine);
-		double deltaY = interp(left.deltaX, right.deltaX, time, cosine);
+		double deltaY = interp(left.deltaY, right.deltaY, time, cosine);
 		double scaleX = interp(left.scaleX, right.scaleX, time, cosine);
 		double scaleY = interp(left.scaleY, right.scaleY, time, cosine);
 		double degrees = interp(left.degrees, right.degrees, time, cosine);
