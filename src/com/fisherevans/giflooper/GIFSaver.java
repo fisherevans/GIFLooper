@@ -5,6 +5,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -36,74 +37,6 @@ public class GIFSaver {
 		this.gifHeight = gifHeight;
 	}
 
-	public String saveGif2(JProgressBar bar) {
-		String errorMsg = "Failed to save file to " + fileLocation;
-		if(decoder != null) {
-            boolean interpType = App.project.settings.timeCosineInterpolation;
-			File saveFile = new File(fileLocation);
-			Rectangle bounds = getBounds(anchors, gifWidth, gifHeight, interpType);
-			bounds.y = bounds.height-gifHeight;
-			System.out.println(bounds);
-			GifEncoder encoder = new GifEncoder();
-			encoder.setQuality(20);
-			encoder.setRepeat(decoder.getLoopCount());
-			if(encoder.start(saveFile.getAbsolutePath())) {
-				double value, dx, dy, xScale, yScale, width, height, rotation;
-				Anchor left, right;
-				BufferedImage img, imgOut = new BufferedImage(bounds.width, bounds.height, BufferedImage.TYPE_INT_RGB);
-				Graphics2D gfx = GraphicsUtil.getG2D(imgOut.createGraphics());
-                gfx.setColor(Color.BLACK);
-
-				int count = anchors.get(anchors.size()-1).frameID - anchors.get(0).frameID;
-				int start = anchors.get(0).frameID;
-				int anchorId = 0;
-				for(int id = 0;id <= count;id++) {
-                    AffineTransform oldT = gfx.getTransform();
-                    Composite oldC = gfx.getComposite();
-
-					int frameId = start + id;
-					left = anchors.get(anchorId);
-					right = anchors.get(anchorId+1);
-					img = decoder.getFrame(frameId);
-					value = (frameId-left.frameID)/(double)(right.frameID-left.frameID);
-
-                    xScale = interp(left.scaleX, right.scaleX, value, interpType);
-                    yScale = interp(left.scaleY, right.scaleY, value, interpType);
-                    width = gifWidth*xScale;
-                    height = gifHeight*yScale;
-					dx = interp(left.deltaX, right.deltaX, value, interpType) + (gifWidth-width)/2.0;
-					dy = interp(left.deltaY, right.deltaY, value, interpType) + (gifHeight-height)/2.0;
-                    rotation = interp(left.degrees, right.degrees, value, interpType);
-
-					if(App.project.settings.clearEachFrame)
-						gfx.fillRect(0, 0, imgOut.getWidth(), imgOut.getHeight());
-
-					AffineTransform t = new AffineTransform();
-			        t.translate(dx-bounds.x, dy+bounds.y);
-			        t.scale(xScale, yScale);
-			        t.rotate(Math.toRadians(rotation), width/2.0+dx, height/2.0+dy);
-			        gfx.drawImage(img, t, null);
-
-                    int delay = (int) (decoder.getDelay(frameId)/App.project.settings.speed);
-					encoder.setDelay(delay < 1 ? 1 : delay);
-					encoder.addFrame(imgOut);
-
-					bar.setValue((int)((id/(double)count)*100));
-                    if(frameId == right.frameID)
-                        anchorId++;
-
-                    gfx.setComposite(oldC);
-                    gfx.setTransform(oldT);
-				}
-				if(!encoder.finish())
-					return errorMsg;
-			} else
-				return errorMsg;
-		} else
-			return errorMsg;
-		return null;
-	}
-
 	public String saveGif(JProgressBar bar) {
 		String errorMsg = "Failed to save file to " + fileLocation;
 		if(decoder != null) {
@@ -112,53 +45,49 @@ public class GIFSaver {
 			encoder.setQuality(20);
 			encoder.setRepeat(decoder.getLoopCount());
 			if(encoder.start(saveFile.getAbsolutePath())) {
-				double value, dx, dy, xScale, yScale, width, height, rotation;
-				Anchor left, right;
-				BufferedImage img, imgOut = new BufferedImage(gifWidth, gifHeight, BufferedImage.TYPE_INT_RGB);
-				Graphics2D gfx = GraphicsUtil.getG2D(imgOut.createGraphics());
-                gfx.setColor(Color.BLACK);
-
-                boolean interpType = App.project.settings.timeCosineInterpolation;
-				int count = anchors.get(anchors.size()-1).frameID - anchors.get(0).frameID;
 				int start = anchors.get(0).frameID;
+				int end = anchors.get(anchors.size()-1).frameID;
+				int count = end - start;
+				boolean useCosine = App.project.settings.timeCosineInterpolation;
+				bar.setMaximum(count*2);
+				
+				List<FrameTransform> transforms = new ArrayList<FrameTransform>(count);
+				Rectangle bounds, shape = new Rectangle(0, 0, gifWidth, gifHeight);
+				int x1 = Integer.MAX_VALUE;
+				int y1 = Integer.MIN_VALUE;
+				int x2 = Integer.MIN_VALUE;
+				int y2 = Integer.MAX_VALUE;
 				int anchorId = 0;
-				for(int id = 0;id <= count;id++) {
-                    AffineTransform oldT = gfx.getTransform();
-                    Composite oldC = gfx.getComposite();
-
-					int frameId = start + id;
-					left = anchors.get(anchorId);
-					right = anchors.get(anchorId+1);
-					img = decoder.getFrame(frameId);
-					value = (frameId-left.frameID)/(double)(right.frameID-left.frameID);
-
-                    xScale = interp(left.scaleX, right.scaleX, value, interpType);
-                    yScale = interp(left.scaleY, right.scaleY, value, interpType);
-                    width = gifWidth*xScale;
-                    height = gifHeight*yScale;
-					dx = interp(left.deltaX, right.deltaX, value, interpType) + (gifWidth-width)/2.0;
-					dy = interp(left.deltaY, right.deltaY, value, interpType) + (gifHeight-height)/2.0;
-                    rotation = interp(left.degrees, right.degrees, value, interpType);
-
-					if(App.project.settings.clearEachFrame)
-						gfx.fillRect(0, 0, imgOut.getWidth(), imgOut.getHeight());
-
-					AffineTransform t = new AffineTransform();
-			        t.translate(dx, dy);
-			        t.scale(xScale, yScale);
-			        t.rotate(Math.toRadians(rotation), width/2.0+dx, height/2.0+dy);
-			        gfx.drawImage(img, t, null);
-
-                    int delay = (int) (decoder.getDelay(frameId)/App.project.settings.speed);
-					encoder.setDelay(delay < 1 ? 1 : delay);
-					encoder.addFrame(imgOut);
-
-					bar.setValue((int)((id/(double)count)*100));
+				for(int frameId = start;frameId <= end;frameId++) {
+					Anchor left = anchors.get(anchorId);
+					Anchor right = anchors.get(anchorId+1);
+					double interpValue = (frameId-left.frameID)/(double)(right.frameID-left.frameID);
+					
+					FrameTransform transform = getInterpolatedTransformation(left, right, gifWidth, gifHeight, interpValue, useCosine, frameId);
+					transforms.add(transform);
+					
+					bounds = transform.createTransformedShape(shape).getBounds();
+					x1 = Math.min((int) bounds.getX(), x1);
+					y1 = Math.max((int) bounds.getY(), y1);
+					x2 = Math.max((int) (bounds.getX()+bounds.getWidth()), x2);
+					y2 = Math.min((int) (bounds.getY()-bounds.getHeight()), y2);
+					
                     if(frameId == right.frameID)
                         anchorId++;
-
-                    gfx.setComposite(oldC);
-                    gfx.setTransform(oldT);
+			        bar.setValue((frameId-start)/bar.getMaximum()); // GUI
+				}
+				BufferedImage imgOut = new BufferedImage(x2-x1, y1-y2, BufferedImage.TYPE_INT_RGB);
+				Graphics2D gfx = GraphicsUtil.getG2D(imgOut.createGraphics());
+                gfx.setColor(Color.BLACK);
+				for(FrameTransform transform:transforms) {
+					BufferedImage img = decoder.getFrame(transform.getFrameId());
+					//transform.translate(x1, y1);
+					if(App.project.settings.clearEachFrame)
+						gfx.fillRect(0, 0, imgOut.getWidth(), imgOut.getHeight());
+			        gfx.drawImage(img, transform, null);
+			        encoder.setDelay((int)(decoder.getDelay(transform.getFrameId())/App.project.settings.speed));
+			        encoder.addFrame(imgOut);
+			        bar.setValue((++count)/bar.getMaximum()); // GUI
 				}
 				if(!encoder.finish())
 					return errorMsg;
@@ -178,7 +107,7 @@ public class GIFSaver {
 		
 		JPanel progressPanel = new JPanel(new MigLayout());
 		progressPanel.add(new JLabel("Generating GIF, please wait...", JLabel.CENTER), "width 100%, wrap");
-		final JProgressBar bar = new JProgressBar(0, 100);
+		final JProgressBar bar = new JProgressBar(0, 1);
 		progressPanel.add(bar, "width 100%, wrap");
 		
 		GIFLooper.activeFrame.setVisible(false);
@@ -233,35 +162,7 @@ public class GIFSaver {
 		GIFLooper.activeFrame.setVisible(true);
 	}
 	
-	public static Rectangle getBounds(List<Anchor> anchors, int width, int height, boolean cosine) {
-		Rectangle globalBounds = null, localBounds;
-		for(int x = 0;x < anchors.size()-1;x++) {
-			localBounds = getBounds(anchors.get(x), anchors.get(x+1), width, height, cosine);
-			if(globalBounds == null)
-				globalBounds = localBounds;
-			else
-				globalBounds.add(localBounds);
-		}
-		return globalBounds;
-	}
-	
-	public static Rectangle getBounds(Anchor leftAnchor, Anchor rightAnchor, int shapeWidth, int shapeHeight, boolean cosine) {
-		Rectangle baseShape = new Rectangle(0, 0, shapeWidth, shapeHeight); // the shape we draw in the animation
-		Rectangle localBounds = null, anchorBounds; // global bounds is the bounds of the whole animation
-		double timeStep = 1.0/((double)(rightAnchor.frameID-leftAnchor.frameID)); // step for each frame for the animation
-		for(double time = 0;time <= 1;time += timeStep) { // interpolate from one anchor to the next (1000 steps)
-			// Create the transformation and find the finds of the resultant shape
-			AffineTransform transformation = getInterpolatedTransformation(leftAnchor, rightAnchor, shapeWidth, shapeHeight, time, cosine);
-			anchorBounds = transformation.createTransformedShape(baseShape).getBounds();
-			if(localBounds == null) // if it's the first step, create the inital bounds
-				localBounds = anchorBounds;
-			else // otherwise continue adding bounds
-				localBounds.add(anchorBounds);
-		}
-		return localBounds; // return the global bounds
-	}
-	
-	public static AffineTransform getInterpolatedTransformation(Anchor left, Anchor right, int width, int height, double time, boolean cosine) {
+	public static FrameTransform getInterpolatedTransformation(Anchor left, Anchor right, int width, int height, double time, boolean cosine, int frameId) {
 		// get the interpolated values from the two anchors
 		double deltaX = interp(left.deltaX, right.deltaX, time, cosine);
 		double deltaY = interp(left.deltaX, right.deltaX, time, cosine);
@@ -270,7 +171,8 @@ public class GIFSaver {
 		double degrees = interp(left.degrees, right.degrees, time, cosine);
 		
 		// Create the AffineTransformation based on the two interpolated acnhors
-		AffineTransform transform = new AffineTransform();
+		FrameTransform transform = new FrameTransform();
+		transform.setFrameId(frameId);
 		transform.translate(deltaX, deltaY);
 		transform.scale(scaleX, scaleY);
 		transform.rotate(Math.toRadians(degrees),
@@ -294,5 +196,17 @@ public class GIFSaver {
 			return cosineInterpolation(left, right, value);
 		else
 			return linearInterpolation(left, right, value);
+	}
+	
+	private static class FrameTransform extends AffineTransform {
+		private int _frameId;
+		
+		public void setFrameId(int frameId) {
+			_frameId = frameId;
+		}
+		
+		public int getFrameId() {
+			return _frameId;
+		}
 	}
 }
