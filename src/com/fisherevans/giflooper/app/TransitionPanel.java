@@ -28,6 +28,7 @@ import net.miginfocom.swing.MigLayout;
 public class TransitionPanel extends JPanel implements ChangeListener, EventRouterListener {
 	private TransitionViewer _viewer;
 	private double _alpha = 0.5;
+    private JSlider _transition;
 	
 	public TransitionPanel() {
 		super(new MigLayout("fill"));
@@ -43,12 +44,12 @@ public class TransitionPanel extends JPanel implements ChangeListener, EventRout
 	private void createSlider() {
 		add(new JLabel("Transition", JLabel.CENTER), "height 2%, width 100%, wrap");
 
-		JSlider transitionSlider = new JSlider(-100, 100, 50);
-		transitionSlider.addChangeListener(this);
+        _transition = new JSlider(-100, 100, 50);
+        _transition.addChangeListener(this);
 		JPanel sliderPanel = new JPanel(new MigLayout("fill"));
 		sliderPanel.setBackground(Color.WHITE);
 		sliderPanel.add(new JLabel("Left", JLabel.RIGHT), "gapleft 20%, width 5%");
-		sliderPanel.add(transitionSlider, "width 50%");
+		sliderPanel.add(_transition, "width 50%");
 		sliderPanel.add(new JLabel("Right", JLabel.LEFT), "gapright 20%, width 5%");
 
 		add(sliderPanel, "height 2%, width 100%, wrap");
@@ -108,17 +109,17 @@ public class TransitionPanel extends JPanel implements ChangeListener, EventRout
 			g2d.setComposite(ac);
 			double dx = anchor.deltaX;
 			double dy = anchor.deltaY;
-			double xscale = anchor.scaleX*globalScale;
-			double yscale = anchor.scaleY*globalScale;
-			double width = App.current.gifWidth*xscale;
-			double height = App.current.gifHeight*yscale;
+			double scaleX = anchor.scaleX*globalScale;
+			double scaleY = anchor.scaleY*globalScale;
+			double width = App.current.gifWidth*scaleX;
+			double height = App.current.gifHeight*scaleY;
 			dx += globalDX;
 			dy += globalDY;
 
 			g2d.rotate(Math.toRadians(anchor.degrees), width/2.0 + dx, height/2.0 + dy);
 			AffineTransform at = new AffineTransform();
 			at.translate(dx*globalScale, dy*globalScale);
-			at.scale(xscale, yscale);
+			at.scale(scaleX, scaleY);
 	        g2d.drawImage(img, at, null);
 	        
 	        g2d.setTransform(oldT);
