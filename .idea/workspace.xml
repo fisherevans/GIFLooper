@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="GIFLooper:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="2a485f31-1919-4131-801d-26be2b3ac455" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/fisherevans/giflooper/GIFSaver.java" afterPath="$PROJECT_DIR$/src/com/fisherevans/giflooper/GIFSaver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/fisherevans/giflooper/app/TransitionPanel.java" afterPath="$PROJECT_DIR$/src/com/fisherevans/giflooper/app/TransitionPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="GIFLooper.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -21,7 +26,7 @@
     <file path="/App.java" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403135437125" ignored="false" />
     <file path="/CommandPanel.java" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403137232669" ignored="false" />
     <file path="/SettingsFrame.java" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403223743084" ignored="false" />
-    <file path="/GIFSaver.java" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403573841836" ignored="false" />
+    <file path="/GIFSaver.java" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403575366852" ignored="false" />
     <file path="/TransitionPanel.java" changelist="2a485f31-1919-4131-801d-26be2b3ac455" time="1403574160364" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -83,10 +88,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GIFSaver.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="GIFSaver.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/GIFSaver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="83" selection-start="2782" selection-end="2782" vertical-scroll-proportion="0.0">
+            <state line="80" column="35" selection-start="3066" selection-end="3066" vertical-scroll-proportion="0.6254296">
               <folding />
             </state>
           </provider>
@@ -95,16 +100,16 @@
       <file leaf-file-name="Anchor.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/components/Anchor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="71" selection-start="253" selection-end="332" vertical-scroll-proportion="0.0">
+            <state line="13" column="19" selection-start="404" selection-end="404" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TransitionPanel.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="TransitionPanel.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/TransitionPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="31" selection-start="1037" selection-end="1037" vertical-scroll-proportion="0.029209621">
+            <state line="30" column="31" selection-start="1037" selection-end="1037" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -114,6 +119,15 @@
         <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/components/Settings.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="16" column="5" selection-start="456" selection-end="456" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="App.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/App.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="69" column="64" selection-start="2349" selection-end="2349" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -151,8 +165,8 @@
         <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/app/CommandPanel.java" />
         <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/app/Menu.java" />
         <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/app/SettingsFrame.java" />
-        <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/GIFSaver.java" />
         <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/app/TransitionPanel.java" />
+        <option value="$PROJECT_DIR$/src/com/fisherevans/giflooper/GIFSaver.java" />
       </list>
     </option>
   </component>
@@ -310,9 +324,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="OverrideImplement.combined" value="true" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/miglayout-4.0.jar!/" />
@@ -474,7 +488,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="76" y="-8" width="1612" height="1066" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -495,7 +509,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24967742" sideWeight="0.6703418" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3296582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -596,13 +610,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="13" selection-start="3944" selection-end="3944" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/GIFLooper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="26" column="38" selection-start="718" selection-end="718" vertical-scroll-proportion="0.0">
@@ -650,6 +657,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/components/Anchor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="19" selection-start="404" selection-end="404" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/TransitionPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="31" selection-start="1037" selection-end="1037" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/components/Settings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="5" selection-start="456" selection-end="456" vertical-scroll-proportion="0.0">
@@ -657,23 +678,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/components/Anchor.java">
+    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="71" selection-start="253" selection-end="332" vertical-scroll-proportion="0.0">
+        <state line="69" column="64" selection-start="2349" selection-end="2349" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/GIFSaver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="83" selection-start="2782" selection-end="2782" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/giflooper/app/TransitionPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="31" selection-start="1037" selection-end="1037" vertical-scroll-proportion="0.029209621">
+        <state line="80" column="35" selection-start="3066" selection-end="3066" vertical-scroll-proportion="0.6254296">
           <folding />
         </state>
       </provider>
@@ -684,10 +698,12 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <last-edited>GIFLooper:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>

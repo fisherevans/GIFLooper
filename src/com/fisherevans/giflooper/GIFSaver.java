@@ -49,7 +49,6 @@ public class GIFSaver {
 				int end = anchors.get(anchors.size()-1).frameID;
 				int count = end - start;
 				boolean useCosine = App.project.settings.timeCosineInterpolation;
-				bar.setMaximum(count * 2);
 				
 				List<FrameTransform> transforms = new ArrayList<FrameTransform>(count);
 				Rectangle bounds, shape = new Rectangle(0, 0, gifWidth, gifHeight);
@@ -73,7 +72,6 @@ public class GIFSaver {
                     rotateTrans = new AffineTransform();
                     rotateTrans.rotate(Math.toRadians(transform.degrees), bounds.getCenterX(), bounds.getCenterY());
                     bounds = rotateTrans.createTransformedShape(bounds).getBounds();
-					System.out.println(bounds);
 					x1 = Math.min((int) bounds.getX(), x1);
 					y1 = Math.min((int) bounds.getY(), y1);
 					x2 = Math.max((int) (bounds.getX()+bounds.getWidth()), x2);
@@ -81,12 +79,12 @@ public class GIFSaver {
 					
                     if(frameId == right.frameID)
                         anchorId++;
-			        bar.setValue((frameId-start)/bar.getMaximum()); // GUI
+			        bar.setValue((int)(((frameId-start)/((double)count*2)*100))); // GUI
 				}
-                System.out.printf("x1:%d, y1:%d, x2:%d, y2:%d\n", x1, y1, x2, y2);
 				BufferedImage imgOut = new BufferedImage(x2-x1, y2-y1, BufferedImage.TYPE_INT_RGB);
 				Graphics2D gfx = GraphicsUtil.getG2D(imgOut.createGraphics());
                 gfx.setColor(Color.BLACK);
+                int barCount = count;
 				for(FrameTransform transform:transforms) {
                     Composite oldC = gfx.getComposite();
                     AffineTransform oldT = gfx.getTransform();
@@ -100,7 +98,7 @@ public class GIFSaver {
 			        gfx.drawImage(img, transform, null);
 			        encoder.setDelay((int)(decoder.getDelay(transform.frameID)/App.project.settings.speed));
 			        encoder.addFrame(imgOut);
-			        bar.setValue((++count)/bar.getMaximum()); // GUI
+			        bar.setValue((int)((++barCount)/(2.0*count)*100)); // GUI
                     gfx.setTransform(oldT);
                     gfx.setComposite(oldC);
 				}
@@ -122,7 +120,7 @@ public class GIFSaver {
 		
 		JPanel progressPanel = new JPanel(new MigLayout());
 		progressPanel.add(new JLabel("Generating GIF, please wait...", JLabel.CENTER), "width 100%, wrap");
-		final JProgressBar bar = new JProgressBar(0, 1);
+		final JProgressBar bar = new JProgressBar(0, 0, 100);
 		progressPanel.add(bar, "width 100%, wrap");
 		
 		GIFLooper.activeFrame.setVisible(false);
